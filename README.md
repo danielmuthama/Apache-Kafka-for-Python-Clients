@@ -25,8 +25,9 @@ Uses of Kafka are multiple. Here are a few use-cases that could help you to figu
 .
 <img align="left" alt="Visual Studio Code" width="300px" src="https://miro.medium.com/max/622/1*48ck-bvatKzEpVapVa4Mag.png" />
 
-> How the server work for Python clients
-### procedure
+> How the server work for Python clients:
+
+### Procedure
 In our example we’ll create a producer that emits numbers from 1 to 1000 and send them to our Kafka broker. Then a consumer will read the data from the broker and store them in a MongoDb collection.
 
 The advantage of using Kafka is that, if our consumer breaks down, the new or fixed consumer will pick up reading where the previous one stopped. This is a great way to make sure all the data is fed into the database without duplicates or missing data.
@@ -36,7 +37,6 @@ Create a new Python script named producer.py and start with importing json, time
 from time import sleep
 from json import dumps
 from kafka import KafkaProducer
-  
 
 Then initialize a new Kafka producer. Note the following arguments:
 
@@ -67,7 +67,7 @@ from kafka import KafkaConsumer
 from pymongo import MongoClient
 from json import loads
 
-Let’s create our KafkaConsumer and take a closer look at the arguments.
+### Create our KafkaConsumer and take a closer look at the arguments.
 
     The first argument is the topic, numtest in our case.
     bootstrap_servers=[‘localhost:9092’]: same as our producer
@@ -77,7 +77,7 @@ Let’s create our KafkaConsumer and take a closer look at the arguments.
     group_id=’counters’: this is the consumer group to which the consumer belongs. Remember from the introduction that a consumer needs to be part of a consumer group to make the auto commit work.
     The value deserializer deserializes the data into a common json format, the inverse of what our value serializer was doing.
 
-consumer = KafkaConsumer(
+     consumer = KafkaConsumer(
     'numtest',
      bootstrap_servers=['localhost:9092'],
      auto_offset_reset='earliest',
@@ -99,12 +99,10 @@ for message in consumer:
     collection.insert_one(message)
     print('{} added to {}'.format(message, collection))
 
-Testing
+### Testing
 
 Let’s test our two scripts. Open a command prompt and go to the directory where you saved producer.py and consumer.py. Execute producer.py and open a new command prompt. Launch consumer.py and look how it reads all the messages, including the new ones.
 
 Now interrupt the consumer, remember at which number it was (or check it in the database) and restart the consumer. Notice that the consumer picks up all the missed messages and then continues listening for new ones.
 
 Note that if you turn off the consumer within 1 second after reading the message, the message will be retrieved again upon restart. Why? Because our auto_commit_interval is set to 1 second, remember that if the offset is not committed, the consumer will read the message again (if auto_offset_reset is set to earliest).
-
-
