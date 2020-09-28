@@ -1,4 +1,5 @@
 # Apache-kafka-client-for-client
+## Understanding the concept
 Apache Kafka distributed streaming system. kafka-python is designed to function 
 much like the official java client, with a sprinkling of pythonic interfaces.
 
