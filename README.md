@@ -1,9 +1,26 @@
 # Apache-kafka-client-for-client
-Python client for the Apache Kafka distributed stream processing system. kafka-python is designed to function 
+Apache Kafka distributed streaming system. kafka-python is designed to function 
 much like the official java client, with a sprinkling of pythonic interfaces.
+
 > Background Information about Apache kafka
 
 Apache Kafka is an open-source stream-processing software platform developed by the Apache Software Foundation, written in Scala and Java. The project aims to provide a unified, high-throughput, low-latency platform for handling real-time data feeds. Its storage layer is essentially a massively scalable pub/sub message queue architected as a distributed transaction log,making it highly valuable for enterprise infrastructures to process streaming data. Additionally, Kafka connects to external systems (for data import/export) via Kafka Connect and provides Kafka Streams, a Java stream processing library.
+
+> Setting Up the Environment
+
+1. First of all you want to have installed Kafka and Zookeeper on your machine.
+2. Next install Kafka-Python. You can do this using pip or conda, if you’re using an Anaconda distribution.
+
+         pip install kafka-pythonconda install -c conda-forge kafka-python
+
+3. Don’t forget to start your Zookeeper server and Kafka broker before executing the example code below. In this example we assume that Zookeeper is running default on localhost:2181 and Kafka on localhost:9092.
+
+We are also using a topic called numtest in this example, you can create a new topic by opening a new command prompt, navigating to 
+
+    …/kafka/bin/windows and execute:
+
+    kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic numtest
+
 
 Think of it is a big commit log where data is stored in sequence as it happens. The users of this log can just access and use it as per their requirement.
 Kafka Use Cases
@@ -23,7 +40,7 @@ Uses of Kafka are multiple. Here are a few use-cases that could help you to figu
 
 > Kafka Concepts:
 <img align="left" alt="Visual Studio Code" src="https://miro.medium.com/max/622/1*48ck-bvatKzEpVapVa4Mag.png" />
-
+<br />
 ### How the server work for Python clients:
 
 > Procedure
@@ -33,16 +50,16 @@ The advantage of using Kafka is that, if our consumer breaks down, the new or fi
 
 Create a new Python script named producer.py and start with importing json, time.sleep and KafkaProducer from our brand new Kafka-Python library.
 
-from time import sleep
-from json import dumps
-from kafka import KafkaProducer
+    from time import sleep
+    from json import dumps
+    from kafka import KafkaProducer
 
 Then initialize a new Kafka producer. Note the following arguments:
 
-    bootstrap_servers=[‘localhost:9092’]: sets the host and port the producer should contact to bootstrap initial cluster metadata. It is not necessary to set this here, since the default is localhost:9092.
+   bootstrap_servers=[‘localhost:9092’]: sets the host and port the producer should contact to bootstrap initial cluster metadata. It is not necessary to set this         here, since the default is localhost:9092.
     value_serializer=lambda x: dumps(x).encode(‘utf-8’): function of how the data should be serialized before sending to the broker. Here, we convert the data to a json file and encode it to utf-8.
 
-producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
+    producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                          value_serializer=lambda x: 
                          dumps(x).encode('utf-8'))
 
@@ -50,7 +67,7 @@ Now, we want to generate numbers from one till 1000. This can be done with a for
 
 This can be done by calling the send method on the producer and specifying the topic and the data. Note that our value serializer will automatically convert and encode the data. To conclude our iteration,we take a 5 second break. If you want to make sure the message is received by the broker, it’s advised to include a callback.
 
-for e in range(1000):
+    for e in range(1000):
     data = {'number' : e}
     producer.send('numtest', value=data)
     sleep(5)
@@ -62,13 +79,13 @@ Before we start coding our consumer, create a new file consumer.py and import js
 
 Furthermore, you can replace the mongo code with any other code. This can be code to feed the data into another database, code to process the data or anything else you can think of. For more information about PyMongo and MongoDb, please consult the documentation.
 
-from kafka import KafkaConsumer
-from pymongo import MongoClient
-from json import loads
+    from kafka import KafkaConsumer
+    from pymongo import MongoClient
+    from json import loads
 
 ### Create our KafkaConsumer and take a closer look at the arguments.
 
-    The first argument is the topic, numtest in our case.
+   The first argument is the topic, numtest in our case.
     bootstrap_servers=[‘localhost:9092’]: same as our producer
     auto_offset_reset=’earliest’: one of the most important arguments. It handles where the consumer restarts reading after breaking down or being turned off and can be set either to earliest or latest. When set to latest, the consumer starts reading at the end of the log. When set to earliest, the consumer starts reading at the latest committed offset. And that’s exactly what we want here.
     enable_auto_commit=True: makes sure the consumer commits its read offset every interval.
@@ -86,14 +103,14 @@ from json import loads
 
 The code below connects to the numtest collection (a collection is similar to a table in a relational database) of our MongoDb database.
 
-client = MongoClient('localhost:27017')
-collection = client.numtest.numtest
+    client = MongoClient('localhost:27017')
+    collection = client.numtest.numtest
 
 We can extract the data from our consumer by looping through it (the consumer is an iterable). The consumer will keep listening until the broker doesn’t respond anymore. A value of a message can be accessed with the value attribute. Here, we overwrite the message with the message value.
 
 The next line inserts the data into our database collection. The last line prints a confirmation that the message was added to our collection. Note that it is possible to add callbacks to all the actions in this loop.
 
-for message in consumer:
+    for message in consumer:
     message = message.value
     collection.insert_one(message)
     print('{} added to {}'.format(message, collection))
