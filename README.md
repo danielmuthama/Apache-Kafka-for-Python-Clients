@@ -22,7 +22,7 @@ Uses of Kafka are multiple. Here are a few use-cases that could help you to figu
     Based on things I mentioned above, you may say that Kafka also acts as a database. Not a typical databases that have a feature of querying the data as per need, what I meant that you can keep data in Kafka as long as you want without consuming it.
 
 > Kafka Concepts:
-<img align="left" alt="Visual Studio Code" width="300px" src="https://miro.medium.com/max/622/1*48ck-bvatKzEpVapVa4Mag.png" />
+<img align="left" alt="Visual Studio Code" src="https://miro.medium.com/max/622/1*48ck-bvatKzEpVapVa4Mag.png" />
 
 ### How the server work for Python clients:
 
