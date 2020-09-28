@@ -9,7 +9,7 @@ Apache Kafka is an open-source stream-processing software platform developed by 
 
 > Setting Up the Environment
 
-1. First of all you want to have installed Kafka and Zookeeper on your machine.
+1. First of all you want to have installed **Kafka** and **Zookeeper** on your machine.
 2. Next install Kafka-Python. You can do this using pip or conda, if you’re using an Anaconda distribution.
 
          pip install kafka-pythonconda install -c conda-forge kafka-python
