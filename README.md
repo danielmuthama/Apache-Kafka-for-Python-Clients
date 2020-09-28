@@ -45,6 +45,7 @@ Uses of Kafka are multiple. Here are a few use-cases that could help you to figu
 ### How the server work for Python clients:
 
 > Procedure
+
 In our example we’ll create a producer that emits numbers from 1 to 1000 and send them to our Kafka broker. Then a consumer will read the data from the broker and store them in a MongoDb collection.
 
 The advantage of using Kafka is that, if our consumer breaks down, the new or fixed consumer will pick up reading where the previous one stopped. This is a great way to make sure all the data is fed into the database without duplicates or missing data.
