@@ -21,12 +21,12 @@ Uses of Kafka are multiple. Here are a few use-cases that could help you to figu
     5 Database:- 
     Based on things I mentioned above, you may say that Kafka also acts as a database. Not a typical databases that have a feature of querying the data as per need, what I meant that you can keep data in Kafka as long as you want without consuming it.
 
-> Kafka Concepts
+> Kafka Concepts:
 <img align="left" alt="Visual Studio Code" width="300px" src="https://miro.medium.com/max/622/1*48ck-bvatKzEpVapVa4Mag.png" />
 
-> How the server work for Python clients:
+### How the server work for Python clients:
 
-### Procedure
+> Procedure
 In our example we’ll create a producer that emits numbers from 1 to 1000 and send them to our Kafka broker. Then a consumer will read the data from the broker and store them in a MongoDb collection.
 
 The advantage of using Kafka is that, if our consumer breaks down, the new or fixed consumer will pick up reading where the previous one stopped. This is a great way to make sure all the data is fed into the database without duplicates or missing data.
