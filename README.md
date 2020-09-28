@@ -41,6 +41,7 @@ Uses of Kafka are multiple. Here are a few use-cases that could help you to figu
 > Kafka Concepts:
 <img align="left" alt="Visual Studio Code" src="https://miro.medium.com/max/622/1*48ck-bvatKzEpVapVa4Mag.png" />
 <br />
+
 ### How the server work for Python clients:
 
 > Procedure
