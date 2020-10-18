@@ -9,7 +9,7 @@ Apache Kafka is an open-source stream-processing software platform developed by 
 
 > Setting Up the Environment
 
-1. First of all you want to have installed **Kafka** and **Zookeeper** on your machine.
+1. First of all you must have installed **Kafka** and **Zookeeper** on your machine.
 2. Next install Kafka-Python. You can do this using pip or conda, if you’re using an Anaconda distribution.
 
          pip install kafka-pythonconda install -c conda-forge kafka-python
@@ -29,9 +29,9 @@ Kafka Use Cases
 Uses of Kafka are multiple. Here are a few use-cases that could help you to figure out its usage.
 
     1 Activity Monitoring:- 
-    Kafka can be used for activity monitoring. The activity could belong to a website or physical sensors and devices. Producers can publish raw data from data sources that later can be used to find trends and pattern.
+    Kafka can be used for activity monitoring. The activity could belong to a website or physical sensors and devices. Producers can publish raw data from data              sources that later can be used to find trends and pattern.
     2 Messaging:- 
-    Kafka can be used as a message broker among services. If you are implementing a microservice architecture, you can have a microservice as a producer and another as a consumer. For instance, you have a microservice that is responsible to create new accounts and other for sending email to users about account creation.
+    Kafka can be used as a message broker among services. If you are implementing a microservice architecture, you can have a microservice as a producer and another    as a consumer. For instance, you have a microservice that is responsible to create new accounts and other for sending email to users about account creation.
     3 Log Aggregation:- 
     You can use Kafka to collect logs from different systems and store in a centralized system for further processing.
     4 ETL:- 
