@@ -92,7 +92,7 @@ Furthermore, you can replace the mongo code with any other code. This can be cod
     from pymongo import MongoClient
     from json import loads
 
-### Create our KafkaConsumer and take a closer look at the arguments.
+### Create our Kafka Consumer and take a closer look at the arguments.
 
    The first argument is the topic, numtest in our case.
     bootstrap_servers=[‘localhost:9092’]: same as our producer
