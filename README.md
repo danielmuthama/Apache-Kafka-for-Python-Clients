@@ -29,27 +29,32 @@ Kafka Use Cases
 Uses of Kafka are multiple. Here are a few use-cases that could help you to figure out its usage.
 
     1 Activity Monitoring:- 
-    Kafka can be used for activity monitoring. The activity could belong to a website or physical sensors and devices. Producers can publish raw data from data              sources that later can be used to find trends and pattern.
+   Kafka can be used for activity monitoring. The activity could belong to a website or physical sensors and devices. Producers can publish raw data from data              sources that later can be used to find trends and pattern.
+   
     2 Messaging:- 
-    Kafka can be used as a message broker among services. If you are implementing a microservice architecture, you can have a microservice as a producer and another    as a consumer. For instance, you have a microservice that is responsible to create new accounts and other for sending email to users about account creation.
+   Kafka can be used as a message broker among services. If you are implementing a microservice architecture, you can have a microservice as a producer and another    as a consumer. For instance, you have a microservice that is responsible to create new accounts and other for sending email to users about account creation.
+   
     3 Log Aggregation:- 
-    You can use Kafka to collect logs from different systems and store in a centralized system for further processing.
+   You can use Kafka to collect logs from different systems and store in a centralized system for further processing.
+   
     4 ETL:- 
-    Kafka has a feature of almost real-time streaming thus you can come up with an ETL based on your need.
+   Kafka has a feature of almost real-time streaming thus you can come up with an ETL based on your need.
+    
     5 Database:- 
-    Based on things I mentioned above, you may say that Kafka also acts as a database. Not a typical databases that have a feature of querying the data as per need, what I meant that you can keep data in Kafka as long as you want without consuming it.
+   Based on things I mentioned above, you may say that Kafka also acts as a database. Not a typical databases that have a feature of querying the data as per need, what I meant that you can keep data in Kafka as long as you want without consuming it.
 
 > Kafka Concepts:
-<img align="left" alt="Visual Studio Code" src="https://miro.medium.com/max/622/1*48ck-bvatKzEpVapVa4Mag.png" />
+
+<img align="left" alt="KAFKA" src="https://miro.medium.com/max/622/1*48ck-bvatKzEpVapVa4Mag.png" />
 <br />
 
-### How the server work for Python clients:
+### How the server works with the Python clients:
 
 > Procedure
 
 In our example we’ll create a producer that emits numbers from 1 to 1000 and send them to our Kafka broker. Then a consumer will read the data from the broker and store them in a MongoDb collection.
 
-The advantage of using Kafka is that, if our consumer breaks down, the new or fixed consumer will pick up reading where the previous one stopped. This is a great way to make sure all the data is fed into the database without duplicates or missing data.
+***The advantage of using Kafka is that, if our consumer breaks down, the new or fixed consumer will pick up reading where the previous one stopped. This is a great way to make sure all the data is fed into the database without duplicates or missing data.
 
 Create a new Python script named producer.py and start with importing json, time.sleep and KafkaProducer from our brand new Kafka-Python library.
 
@@ -59,7 +64,8 @@ Create a new Python script named producer.py and start with importing json, time
 
 Then initialize a new Kafka producer. Note the following arguments:
 
-   bootstrap_servers=[‘localhost:9092’]: sets the host and port the producer should contact to bootstrap initial cluster metadata. It is not necessary to set this         here, since the default is localhost:9092.
+            bootstrap_servers=[‘localhost:9092’]
+Sets the host and port the producer should contact to bootstrap initial cluster metadata. It is not necessary to set this         here, since the default is localhost:9092.
     value_serializer=lambda x: dumps(x).encode(‘utf-8’): function of how the data should be serialized before sending to the broker. Here, we convert the data to a json file and encode it to utf-8.
 
     producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
